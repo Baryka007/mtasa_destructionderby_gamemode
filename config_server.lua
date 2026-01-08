@@ -42,7 +42,7 @@ function getAddonsInfo()
 	-- Find availible
 	local addonsInfoMap = {}
 	for _, resource in ipairs(getResources()) do
-		if getResourceInfo ( resource, 'addon' ) == 'race' then
+		if getResourceInfo ( resource, 'addon' ) == g_ResourceName then
 			local info = {}
 			info.name = getResourceName ( resource )
 			info.tag = getResourceInfo ( resource, 'name' ) or getResourceName(resource)
@@ -56,7 +56,7 @@ function getAddonsInfo()
 		end
 	end
 	-- Find active
-	for idx,name in ipairs(string.split(getString('race.addons'),',')) do
+	for idx,name in ipairs(string.split(getString(g_ResourceSettingPrefix .. 'addons'),',')) do
 		if addonsInfoMap[name] then
 			addonsInfoMap[name].enabled = true
 		end

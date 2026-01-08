@@ -24,9 +24,9 @@ g_Vehicles = {}				-- { player = vehicle }
 
 addEventHandler('onPlayerJoin', root,
 	function()
-		outputConsole ( 'Race version ' .. getBuildString(), source, 255, 127, 0 )
+		outputConsole ( (g_ResourceName or 'Race') .. ' version ' .. getBuildString(), source, 255, 127, 0 )
 		for _,line in ipairs(Addons.report) do
-			outputConsole ( 'Race addon: ' .. line, source )
+			outputConsole ( (g_ResourceName or 'Race') .. ' addon: ' .. line, source )
 		end
 	end
 )
@@ -84,50 +84,50 @@ addEventHandler('onSettingChange', resourceRoot,
 
 function cacheGameOptions()
 	g_GameOptions = {}
-	g_GameOptions.timeafterfirstfinish  = getNumber('race.timeafterfirstfinish',30) * 1000
-	g_GameOptions.hurrytime				= getNumber('race.hurrytime',15) * 1000
-	g_GameOptions.defaultrespawnmode	= getString('race.respawnmode','none')
-	g_GameOptions.defaultrespawntime	= getNumber('race.respawntime',5) * 1000
-	g_GameOptions.defaultduration		= getNumber('race.duration',6000) * 1000
-	g_GameOptions.ghostmode				= getBool('race.ghostmode',false)
-	g_GameOptions.ghostalpha			= getBool('race.ghostalpha',false)
-	g_GameOptions.ghostalphalevel		= getNumber('race.ghostalphalevel',180)
-	g_GameOptions.randommaps			= getBool('race.randommaps',false)
-	g_GameOptions.statskey				= getString('race.statskey','name')
-	g_GameOptions.vehiclecolors			= getString('race.vehiclecolors','file')
-	g_GameOptions.skins					= getString('race.skins','cj')
-	g_GameOptions.autopimp				= getBool('race.autopimp',true)
-	g_GameOptions.vehicleweapons		= getBool('race.vehicleweapons',true)
-	g_GameOptions.firewater				= getBool('race.firewater',false)
-	g_GameOptions.classicchangez		= getBool('race.classicchangez',false)
-	g_GameOptions.admingroup			= getString('race.admingroup','Admin')
-	g_GameOptions.blurlevel				= getNumber('race.blur',36)
-	g_GameOptions.cloudsenable			= getBool('race.clouds',true)
-	g_GameOptions.joinspectating		= getBool('race.joinspectating',true)
-	g_GameOptions.stealthspectate		= getBool('race.stealthspectate',true)
-	g_GameOptions.countdowneffect		= getBool('race.countdowneffect',true)
-	g_GameOptions.showmapname			= getBool('race.showmapname',true)
-	g_GameOptions.hunterminigun			= getBool('race.hunterminigun',true)
-	g_GameOptions.securitylevel			= getNumber('race.securitylevel',2)
-	g_GameOptions.anyonecanspec			= getBool('race.anyonecanspec',true)
-	g_GameOptions.norsadminspectate		= getBool('race.norsadminspectate',false)
-	g_GameOptions.racerespawn			= getBool('race.racerespawn',true)
-	g_GameOptions.joinrandomvote		= getBool('race.joinrandomvote',true)
-	g_GameOptions.showauthorname		= getBool('race.showauthorname',true)
-	g_GameOptions.ghostmode_map_can_override		= getBool('race.ghostmode_map_can_override',true)
-	g_GameOptions.skins_map_can_override			= getBool('race.skins_map_can_override',true)
-	g_GameOptions.vehicleweapons_map_can_override   = getBool('race.vehicleweapons_map_can_override',true)
-	g_GameOptions.autopimp_map_can_override			= getBool('race.autopimp_map_can_override',true)
-	g_GameOptions.firewater_map_can_override		= getBool('race.firewater_map_can_override',true)
-	g_GameOptions.classicchangez_map_can_override	= getBool('race.classicchangez_map_can_override',true)
-	g_GameOptions.ghostmode_warning_if_map_override			= getBool('race.ghostmode_warning_if_map_override',true)
-	g_GameOptions.vehicleweapons_warning_if_map_override	= getBool('race.vehicleweapons_warning_if_map_override',true)
-	g_GameOptions.hunterminigun_map_can_override	= getBool('race.hunterminigun_map_can_override',true)
-	g_GameOptions.endmapwhenonlyspectators	= getBool('race.endmapwhenonlyspectators',true)
-	g_GameOptions.vehicle_physics_mode = getString('race.vehicle_physics_mode','legacy')
-	g_GameOptions.vehicle_physics_fps = getNumber('race.vehicle_physics_fps',-1)
-	g_GameOptions.vehicle_physics_mode_map_can_override = getBool('race.vehicle_physics_mode_map_can_override',true)
-	g_GameOptions.vehicle_physics_fps_map_can_override = getBool('race.vehicle_physics_fps_map_can_override',true)
+	g_GameOptions.timeafterfirstfinish  = getNumber(g_ResourceSettingPrefix .. 'timeafterfirstfinish',30) * 1000
+	g_GameOptions.hurrytime				= getNumber(g_ResourceSettingPrefix .. 'hurrytime',15) * 1000
+	g_GameOptions.defaultrespawnmode	= getString(g_ResourceSettingPrefix .. 'respawnmode','none')
+	g_GameOptions.defaultrespawntime	= getNumber(g_ResourceSettingPrefix .. 'respawntime',5) * 1000
+	g_GameOptions.defaultduration		= getNumber(g_ResourceSettingPrefix .. 'duration',6000) * 1000
+	g_GameOptions.ghostmode				= getBool(g_ResourceSettingPrefix .. 'ghostmode',false)
+	g_GameOptions.ghostalpha			= getBool(g_ResourceSettingPrefix .. 'ghostalpha',false)
+	g_GameOptions.ghostalphalevel		= getNumber(g_ResourceSettingPrefix .. 'ghostalphalevel',180)
+	g_GameOptions.randommaps			= getBool(g_ResourceSettingPrefix .. 'randommaps',false)
+	g_GameOptions.statskey				= getString(g_ResourceSettingPrefix .. 'statskey','name')
+	g_GameOptions.vehiclecolors			= getString(g_ResourceSettingPrefix .. 'vehiclecolors','file')
+	g_GameOptions.skins					= getString(g_ResourceSettingPrefix .. 'skins','cj')
+	g_GameOptions.autopimp				= getBool(g_ResourceSettingPrefix .. 'autopimp',true)
+	g_GameOptions.vehicleweapons		= getBool(g_ResourceSettingPrefix .. 'vehicleweapons',true)
+	g_GameOptions.firewater				= getBool(g_ResourceSettingPrefix .. 'firewater',false)
+	g_GameOptions.classicchangez		= getBool(g_ResourceSettingPrefix .. 'classicchangez',false)
+	g_GameOptions.admingroup			= getString(g_ResourceSettingPrefix .. 'admingroup','Admin')
+	g_GameOptions.blurlevel				= getNumber(g_ResourceSettingPrefix .. 'blur',36)
+	g_GameOptions.cloudsenable			= getBool(g_ResourceSettingPrefix .. 'clouds',true)
+	g_GameOptions.joinspectating		= getBool(g_ResourceSettingPrefix .. 'joinspectating',true)
+	g_GameOptions.stealthspectate		= getBool(g_ResourceSettingPrefix .. 'stealthspectate',true)
+	g_GameOptions.countdowneffect		= getBool(g_ResourceSettingPrefix .. 'countdowneffect',true)
+	g_GameOptions.showmapname			= getBool(g_ResourceSettingPrefix .. 'showmapname',true)
+	g_GameOptions.hunterminigun			= getBool(g_ResourceSettingPrefix .. 'hunterminigun',true)
+	g_GameOptions.securitylevel			= getNumber(g_ResourceSettingPrefix .. 'securitylevel',2)
+	g_GameOptions.anyonecanspec			= getBool(g_ResourceSettingPrefix .. 'anyonecanspec',true)
+	g_GameOptions.norsadminspectate		= getBool(g_ResourceSettingPrefix .. 'norsadminspectate',false)
+	g_GameOptions.racerespawn			= getBool(g_ResourceSettingPrefix .. 'racerespawn',true)
+	g_GameOptions.joinrandomvote		= getBool(g_ResourceSettingPrefix .. 'joinrandomvote',true)
+	g_GameOptions.showauthorname		= getBool(g_ResourceSettingPrefix .. 'showauthorname',true)
+	g_GameOptions.ghostmode_map_can_override		= getBool(g_ResourceSettingPrefix .. 'ghostmode_map_can_override',true)
+	g_GameOptions.skins_map_can_override			= getBool(g_ResourceSettingPrefix .. 'skins_map_can_override',true)
+	g_GameOptions.vehicleweapons_map_can_override   = getBool(g_ResourceSettingPrefix .. 'vehicleweapons_map_can_override',true)
+	g_GameOptions.autopimp_map_can_override			= getBool(g_ResourceSettingPrefix .. 'autopimp_map_can_override',true)
+	g_GameOptions.firewater_map_can_override		= getBool(g_ResourceSettingPrefix .. 'firewater_map_can_override',true)
+	g_GameOptions.classicchangez_map_can_override	= getBool(g_ResourceSettingPrefix .. 'classicchangez_map_can_override',true)
+	g_GameOptions.ghostmode_warning_if_map_override			= getBool(g_ResourceSettingPrefix .. 'ghostmode_warning_if_map_override',true)
+	g_GameOptions.vehicleweapons_warning_if_map_override	= getBool(g_ResourceSettingPrefix .. 'vehicleweapons_warning_if_map_override',true)
+	g_GameOptions.hunterminigun_map_can_override	= getBool(g_ResourceSettingPrefix .. 'hunterminigun_map_can_override',true)
+	g_GameOptions.endmapwhenonlyspectators	= getBool(g_ResourceSettingPrefix .. 'endmapwhenonlyspectators',true)
+	g_GameOptions.vehicle_physics_mode = getString(g_ResourceSettingPrefix .. 'vehicle_physics_mode','legacy')
+	g_GameOptions.vehicle_physics_fps = getNumber(g_ResourceSettingPrefix .. 'vehicle_physics_fps',-1)
+	g_GameOptions.vehicle_physics_mode_map_can_override = getBool(g_ResourceSettingPrefix .. 'vehicle_physics_mode_map_can_override',true)
+	g_GameOptions.vehicle_physics_fps_map_can_override = getBool(g_ResourceSettingPrefix .. 'vehicle_physics_fps_map_can_override',true)
 	if g_GameOptions.statskey ~= 'name' and g_GameOptions.statskey ~= 'serial' then
 		outputWarning( "statskey is not set to 'name' or 'serial'" )
 		g_GameOptions.statskey = 'name'
@@ -1229,14 +1229,14 @@ function startAddons()
 		table.insert(Addons.report,line2)
 	end
 
-	for idx,name in ipairs(string.split(getString('race.addons'),',')) do
+	for idx,name in ipairs(string.split(getString(g_ResourceSettingPrefix .. 'addons'),',')) do
 		if name ~= '' then
 			local resource = getResourceFromName(name)
 			if not resource then
 				outputWarning( "Can't use addon '" .. name .. "', as it is not the name of a resource" )
 			else
-				if getResourceInfo ( resource, 'addon' ) ~= 'race' then
-					outputWarning( "Can't use addon " .. name .. ', as it does not have addon="race" in the info section' )
+				if getResourceInfo ( resource, 'addon' ) ~= g_ResourceName then
+					outputWarning( "Can't use addon " .. name .. ', as it does not have addon="' .. tostring(g_ResourceName) .. '" in the info section' )
 				else
 					-- Start or restart resource
 					if getResourceState(resource) == 'running' then
@@ -1391,7 +1391,7 @@ TimerManager.createTimerFor("raceresource","integrity"):setTimer(
 		-- Two fails in a row triggers a script restart
 		if g_IntegrityFailCount > 1 then
 			outputRace( "Race script integrity compromised - Restarting" )
-			exports.mapmanager:changeGamemode( getResourceFromName('race') )
+			exports.mapmanager:changeGamemode( getThisResource() )
 		end
 	end,
 	1000,0
@@ -1400,13 +1400,13 @@ TimerManager.createTimerFor("raceresource","integrity"):setTimer(
 ------------------------
 -- Testing commands
 
-addCommandHandler('restartracemode',
+addCommandHandler('restartddmode',
 	function(player)
 		if not _TESTING and not isPlayerInACLGroup(player, g_GameOptions.admingroup) then
 			return
 		end
-		outputChatBox('Race restarted by ' .. getPlayerName(player), root, 0, 240, 0)
-		exports.mapmanager:changeGamemode( getResourceFromName('race') )
+		outputChatBox('DD restarted by ' .. getPlayerName(player), root, 0, 240, 0)
+		exports.mapmanager:changeGamemode( getThisResource() )
 	end
 )
 

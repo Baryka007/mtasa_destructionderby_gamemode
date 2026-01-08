@@ -31,16 +31,22 @@ function DestructionDerby:updateRanks()
 end
 
 function DestructionDerby:onPlayerWasted(player)
-	if isActivePlayer(player) then
-		self:handleFinishActivePlayer(player)
-		if getActivePlayerCount() <= 1 then
-			RaceMode.endMap()
-		else
+	if not isActivePlayer(player) then
+		return
+	end
+	if not self.checkpointBackups[player] then
+		return
+	end
+
+	local respawnTime = RaceMode.getMapOption('respawntime') or g_GameOptions.defaultrespawntime
+	if respawnTime and respawnTime > 0 then
+		Countdown.create(respawnTime / 1000, restorePlayer, 'You will respawn in:', 255, 255, 255, 0.25, 2.5, true, self.id, player):start(player)
+		if respawnTime >= 5000 then
 			TimerManager.createTimerFor("map",player):setTimer(clientCall, 2000, 1, player, 'Spectate.start', 'auto')
 		end
+	else
+		restorePlayer(self.id, player)
 	end
-	RaceMode.setPlayerIsFinished(player)
-	showBlipsAttachedTo(player, false)
 end
 
 function DestructionDerby:onPlayerQuit(player)
