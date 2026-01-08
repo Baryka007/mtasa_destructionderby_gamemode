@@ -1,0 +1,50 @@
+ --
+ -- common.lua
+ --   Common setting for server and client
+ --
+ 
+ --_DEBUG_LOG = {'UNDEF','MISC','OPTIMIZATION','TOPTIMES','STATE','JOINER','TIMER','RANDMAP','CHECKPOINT','CP','SPECTATE'}   -- More logging
+ --_DEBUG_TIMING = true        -- Introduce delays
+ --_DEBUG_CHECKS = true        -- Extra checks
+ _TESTING = false             -- Any user can issue test commands
+ 
+ ---------------------------------------------------------------------------
+ -- Script location
+ ---------------------------------------------------------------------------
+-function isServer()				return triggerClientEvent ~= nil	end
+-function isClient()				return triggerServerEvent ~= nil	end
+-function getScriptLocation()	return isServer() and "Server" or "Client"	end
++function isServer()				return triggerClientEvent ~= nil	end
++function isClient()				return triggerServerEvent ~= nil	end
++function getScriptLocation()	return isServer() and "Server" or "Client"	end
++
++g_ResourceName = g_ResourceName or (getThisResource and getResourceName(getThisResource()) or nil)
++g_ResourceSettingPrefix = g_ResourceSettingPrefix or (g_ResourceName and (g_ResourceName .. ".") or "")
+ 
+ ---------------------------------------------------------------------------
+ -- Math extentions
+ ---------------------------------------------------------------------------
+ function math.lerp(from,to,alpha)
+     return from + (to-from) * alpha
+ end
+ 
+ function math.clamp(low,value,high)
+     return math.max(low,math.min(value,high))
+ end
+ 
+ function math.wrap(low,value,high)
+     while value > high do
+         value = value - (high-low)
+     end
+     while value < low do
+         value = value + (high-low)
+     end
+     return value
+ end
+ 
+ function math.wrapdifference(low,value,other,high)
+     return math.wrap(low,value-other,high)+other
+ end
+ 
+EOF
+)
