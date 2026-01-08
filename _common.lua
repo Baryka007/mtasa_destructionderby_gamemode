@@ -11,9 +11,13 @@ _TESTING = false             -- Any user can issue test commands
 ---------------------------------------------------------------------------
 -- Script location
 ---------------------------------------------------------------------------
+
 function isServer()				return triggerClientEvent ~= nil	end
 function isClient()				return triggerServerEvent ~= nil	end
 function getScriptLocation()	return isServer() and "Server" or "Client"	end
+
+g_ResourceName = g_ResourceName or (getThisResource and getResourceName(getThisResource()) or nil)
+g_ResourceSettingPrefix = g_ResourceSettingPrefix or (g_ResourceName and (g_ResourceName .. ".") or "")
 
 ---------------------------------------------------------------------------
 -- Math extentions
@@ -376,3 +380,4 @@ Vector3D = {
 	end,
 }
 ---------------------------------------------------------------------------
+
