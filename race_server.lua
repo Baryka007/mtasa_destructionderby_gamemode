@@ -24,9 +24,9 @@ g_Vehicles = {}				-- { player = vehicle }
 
 addEventHandler('onPlayerJoin', root,
 	function()
-		outputConsole ( 'Race version ' .. getBuildString(), source, 255, 127, 0 )
+		outputConsole ( (g_ResourceName or 'Race') .. ' version ' .. getBuildString(), source, 255, 127, 0 )
 		for _,line in ipairs(Addons.report) do
-			outputConsole ( 'Race addon: ' .. line, source )
+			outputConsole ( (g_ResourceName or 'Race') .. ' addon: ' .. line, source )
 		end
 	end
 )
@@ -1484,3 +1484,4 @@ function checkClient(checkAccess,player,...)
 	end
 	return false
 end
+
